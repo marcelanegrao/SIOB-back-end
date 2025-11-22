@@ -1,0 +1,25 @@
+# .gitignore
+
+# Dependências
+/node_modules
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# Build
+/dist
+/build
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Outros
+.DS_Store
