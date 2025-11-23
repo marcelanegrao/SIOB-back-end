@@ -1,5 +1,2 @@
-[00:00:00.735] Server  LOG      ✓ Ready in 470ms
-[00:03:07.399] Server  LOG     
-[00:03:07.399] Server  LOG        We detected TypeScript in your project and created a tsconfig.json file for you.
-[00:18:00.766] Server  ERROR   Erro no bootstrap: MongoServerSelectionError: C08CFE62A27B0000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:916:SSL alert number 80
-
+[00:00:00.730] Server  LOG      ✓ Ready in 460ms
+[00:00:34.134] Server  ERROR   Erro no bootstrap: MongoServerSelectionError: connection <monitor> to 159.41.36.14:27017 closed

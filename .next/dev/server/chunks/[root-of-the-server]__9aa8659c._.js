@@ -33,7 +33,11 @@ if (!process.env.MONGODB_URI) {
     throw new Error("Defina a variável de ambiente MONGODB_URI em .env.local");
 }
 const uri = process.env.MONGODB_URI;
-const options = {};
+// Adiciona explicitamente a opção 'tls: false' para contornar problemas de conexão SSL/TLS no Codespace.
+// Isso é crucial para ambientes de desenvolvimento como o Codespace.
+const options = {
+    tls: false
+};
 let client;
 let clientPromise;
 // Lógica para reutilizar a conexão em ambiente de desenvolvimento (evita lentidão)

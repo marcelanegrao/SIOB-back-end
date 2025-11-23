@@ -6,7 +6,9 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI
-const options = {}
+// Adiciona explicitamente a opção 'tls: false' para contornar problemas de conexão SSL/TLS no Codespace.
+// Isso é crucial para ambientes de desenvolvimento como o Codespace.
+const options = { tls: false }
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
 
