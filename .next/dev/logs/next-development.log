@@ -1,2 +1,0 @@
-[00:00:00.730] Server  LOG      ✓ Ready in 460ms
-[00:00:34.134] Server  ERROR   Erro no bootstrap: MongoServerSelectionError: connection <monitor> to 159.41.36.14:27017 closed

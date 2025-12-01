@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  app:
+    image: node:18-bullseye
+    user: "node"
+    working_dir: /workspace
+    # Mapeia a pasta atual (.) do seu computador para /workspace dentro do container
+    volumes:
+      - .:/workspace
+    # Instala o que tiver no package.json e roda o script 'dev'
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    environment:
+      # Conecta ao serviço 'db' definido abaixo
+      - DATABASE_URL=mysql://user:password@db:3306/siob_db
+      - JWT_SECRET=segredo_siob_dev_2025
+      - PORT=3000
+    depends_on:
+      - db
+    networks:
+      - siob-network
+
+  db:
+    image: mysql:8.0
+    container_name: siob-mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: siob_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - siob-mysql-data:/var/lib/mysql
+    networks:
+      - siob-network
+
+volumes:
+  siob-mysql-data:
+
+networks:
+  siob-network:
