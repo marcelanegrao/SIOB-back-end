@@ -37,4 +37,22 @@ export class OcorrenciaController {
     await service.delete(id);
     return res.status(204).send();
   }
+
+  // --- NOVO MÉTODO PARA UPLOAD ---
+  async uploadMidia(req: AuthRequest, res: Response) {
+    const { id } = req.params; // ID da Ocorrência
+    const userId = req.user?.userId;
+    const file = req.file; // Arquivo vindo do Multer
+
+    if (!userId) return res.status(401).json({ error: "Usuário não autenticado." });
+    if (!file) return res.status(400).json({ error: "Nenhum arquivo enviado." });
+
+    // Chama o service passando a URL gerada pelo Cloudinary
+    const result = await service.addMidia(id, userId, {
+      url: file.path, // O Cloudinary retorna a URL na propriedade 'path'
+      tipo: file.mimetype
+    });
+
+    return res.status(201).json(result);
+  }
 }
