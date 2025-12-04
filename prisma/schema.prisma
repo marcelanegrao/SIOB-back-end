@@ -23,6 +23,10 @@ model User {
   status_usuario String   @default("ATIVO") 
   tipo_perfil    String   @default("ANALISTA")
 
+  // --- CAMPO ADICIONADO PARA CORRIGIR O ERRO DE BUILD ---
+  id_unidade_operacional_fk String?
+  // ------------------------------------------------------
+
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
@@ -78,7 +82,7 @@ model Ocorrencia {
   status           String   @default("PENDENTE") // Era 'situacao', agora é 'status'
   // ---------------------
 
-  prioridade       String   @default("MEDIA")    
+  prioridade       String   @default("MEDIA")     
   
   // --- LOCALIZAÇÃO ---
   rua_avenida      String?  

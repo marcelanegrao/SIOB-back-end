@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// Lista exata baseada na imagem enviada (WhatsApp Image 2025-11-30 at 12.53.05.jpeg)
 const CARGOS_MILITARES = [
   "Soldado",
   "Cabo",
@@ -23,15 +22,10 @@ export const createUserSchema = z.object({
     matricula: z.string().min(1, "Matrícula é obrigatória"),
     password: z.string().min(6, "Senha deve ter no mínimo 6 caracteres").optional(),
     
-    // Agora o cargo valida exatamente a lista da imagem
-    cargo: z.enum(CARGOS_MILITARES, {
-      errorMap: () => ({ message: "Cargo inválido. Escolha uma patente válida." })
-    }),
+    // Simplificado para evitar erros de tipagem no build
+    cargo: z.enum(CARGOS_MILITARES),
     
-    // Perfil de Acesso (Permissões no Software)
     tipo_perfil: z.enum(["ADMIN", "ANALISTA", "CHEFE", "OPERADOR_CAMPO"]).default("ANALISTA"),
-    
-    // Status (Ativo/Inativo)
     status_usuario: z.enum(["ATIVO", "INATIVO"]).default("ATIVO"),
   }),
 });

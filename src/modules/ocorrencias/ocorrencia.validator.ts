@@ -21,7 +21,8 @@ export const createOcorrenciaSchema = z.object({
     // --- LOCALIZAÇÃO ---
     rua_avenida: z.string().optional(),
     numero_local: z.string().optional(),
-    bairro: z.string({ required_error: "Bairro é obrigatório" }),
+    // CORREÇÃO 1: Usar .min(1) em vez de { required_error } para compatibilidade
+    bairro: z.string().min(1, "Bairro é obrigatório"),
     municipio: z.string().default("Recife"),
     codigo_local: z.string().optional(),
     ponto_referencia: z.string().optional(),
@@ -42,7 +43,10 @@ export const createOcorrenciaSchema = z.object({
 
     // --- ETAPA 3: Finalização ---
     assinatura_digital: z.string().optional(), // Base64
-    formularios_extras: z.record(z.boolean()).optional(), // Ex: { aph: true, incendio: false }
+    
+    // CORREÇÃO 2 (Seu erro principal): Definir explicitamente chave (string) e valor (boolean)
+    formularios_extras: z.record(z.string(), z.boolean()).optional(), 
+    
     outro_relatorio_tipo: z.string().optional(),
     
     // Contagem de Vítimas
